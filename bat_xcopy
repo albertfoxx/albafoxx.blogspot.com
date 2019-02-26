@@ -1,0 +1,22 @@
+@echo off
+rem Название батника прописать внизу
+title Бэкап с DBServer на TEST-CHARUGIN (1TB)
+set f1=Z:\
+set f11=E:\0bmenka
+set f2=Z:\_Обновления
+set f22=E:\0bmenka\_Обновления
+set f3=W:\
+set f33=E:\distr
+@echo бэкапим Обменку
+
+CD %f1%
+ROBOCOPY %f1% %f11% /XD "Temp" "Для оксаны" "_Обновления" /R:3 /NP /LOG+:backup.log /MIR
+@echo  - - - - - - - - - - - - - - - - - ЗАВЕРШЕНО - - - - - - - - - - - - - - - -
+@echo бэкапим папку "Обновления"
+CD %f2%
+ROBOCOPY %f2% %f22% /XD "AZKExchange" "АЦК-Анализ" "АЦК-Бюджетный контроль" "АЦК-Госзаказ" "АЦК-Контроль" "АЦК-Мониторинг" "АЦК-Планирование" "АЦК-Транспорт" "АЦК-Финансы" /R:3 /NP /LOG+:backup.log /MIR
+@echo  - - - - - - - - - - - - - - - - - ЗАВЕРШЕНО - - - - - - - - - - - - - - - -
+@echo бэкапим дистры
+CD %f3%
+ROBOCOPY %f3% %f33% /R:3 /NP /XD "4android" "2gis" "Media" /LOG+:backup.log /MIR
+@echo  - - - - - - - - - - - - - - - - - ЗАВЕРШЕНО - - - - - - - - - - - - - - - -
